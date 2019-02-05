@@ -62,10 +62,10 @@ public class MessageAdapter extends BaseAdapter {
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            holder.name.setText(message.getData().getName());
+            holder.name.setText(message.getMemberData().getName());
             holder.messageBody.setText(message.getText());
             GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
-            drawable.setColor(Color.parseColor(message.getData().getColor()));
+            drawable.setColor(Color.parseColor(message.getMemberData().getColor()));
         }
 
         return convertView;

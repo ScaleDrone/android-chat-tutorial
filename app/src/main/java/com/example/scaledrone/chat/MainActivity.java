@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity implements RoomListener {
     }
 
     @Override
-    public void onMessage(Room room, final JsonNode json, final Member member) {
+    public void onMessage(Room room, com.scaledrone.lib.Message receivedMessage) {
         final ObjectMapper mapper = new ObjectMapper();
         try {
-            final MemberData data = mapper.treeToValue(member.getClientData(), MemberData.class);
-            boolean belongsToCurrentUser = member.getId().equals(scaledrone.getClientID());
-            final Message message = new Message(json.asText(), data, belongsToCurrentUser);
+            final MemberData data = mapper.treeToValue(receivedMessage.getMember().getClientData(), MemberData.class);
+            boolean belongsToCurrentUser = receivedMessage.getClientID().equals(scaledrone.getClientID());
+            final Message message = new Message(receivedMessage.getData().asText(), data, belongsToCurrentUser);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
